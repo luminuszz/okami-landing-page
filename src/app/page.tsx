@@ -18,9 +18,8 @@ export default function Home() {
         </h1>
 
         <p className="max-w-[30rem] text-center text-sm text-muted-foreground md:text-lg">
-          OKAMI é uma plataforma para você acompanhar e sincronizar suas obras
-          favoritas. Acompanhe o seu progresso de leitura, receba notificações
-          de suas obras favoritas e muito mais.
+          OKAMI é um site que gerencia obras apreciadas por você. E sempre irá
+          avisar que um novo capítulo ou episódio for lançado.
         </p>
 
         <MainButton />
