@@ -16,7 +16,6 @@ export const metadata: Metadata = {
   description: 'Acompanhe e sincronize suas obras favoritas em um só lugar',
   authors: [{ name: 'Okami', url: '@okami' }],
   robots: 'follow, index',
-  themeColor: '#000000',
   icons: ['/favicon.ico', '/okami-logo.png'],
 }
 

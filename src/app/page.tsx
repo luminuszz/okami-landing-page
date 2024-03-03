@@ -13,7 +13,7 @@ export default function Home() {
 
       <section className="mx-auto flex max-w-[980px] flex-col items-center gap-2 py-8 md:py-12 md:pb-8 lg:py-24 lg:pb-20">
         <Logo className="size-48 animate-pulse" />
-        <h1 className="text-center text-3xl font-bold leading-tight tracking-tighter md:text-6xl lg:leading-[1.1] ">
+        <h1 className="text-center text-2xl font-bold leading-tight tracking-tighter md:text-6xl lg:leading-[1.1] ">
           Acompanhe e sincronize suas obras favoritas em um só lugar.
         </h1>
 
@@ -27,10 +27,10 @@ export default function Home() {
 
       <section className="grid-col-2 mb-2 mt-5 grid gap-4 md:grid-cols-2">
         <Card>
-          <CardContent className="flex items-center gap-5  p-10">
+          <CardContent className="flex flex-col items-center gap-5  p-10 md:flex-row">
             <BarChart3 className="size-20 text-foreground" />
 
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 text-center md:text-left">
               <h2 className="text-2xl ">Estatísticas Detalhadas</h2>
               <p className="text-muted-foreground">
                 Gráficos interativos e estatísticas detalhadas proporcionam
@@ -40,10 +40,10 @@ export default function Home() {
           </CardContent>
         </Card>
         <Card>
-          <CardContent className="flex items-center gap-5  p-10">
+          <CardContent className="flex flex-col items-center gap-5  p-10 md:flex-row ">
             <BookCopy className="size-20 text-foreground" />
 
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 text-center md:text-left">
               <h2 className="text-2xl ">Obras na Biblioteca</h2>
               <p className="text-muted-foreground">
                 Visualize a coleção completa de suas obras cadastradas. Cada
@@ -53,9 +53,9 @@ export default function Home() {
           </CardContent>
         </Card>
         <Card>
-          <CardContent className="flex items-center gap-5  p-10">
+          <CardContent className="flex flex-col items-center gap-5  p-10 md:flex-row ">
             <FolderSync className="size-20 text-foreground" />
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 text-center md:text-left">
               <h2 className="text-2xl ">Suas Obras Sempre Atualizadas</h2>
               <p className="text-muted-foreground">
                 Ao cadastrar uma nova obra, basta fornecer a URL do fansub ou
@@ -66,9 +66,9 @@ export default function Home() {
           </CardContent>
         </Card>
         <Card>
-          <CardContent className="flex items-center gap-5  p-10">
+          <CardContent className="flex flex-col items-center gap-5  p-10 md:flex-row ">
             <TelegramIcon fill="white" className="size-20 text-foreground" />
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 text-center md:text-left">
               <h2 className="text-2xl ">Notificações no telegram</h2>
               <p className="text-muted-foreground">
                 Cada vez que uma obra que você acompanha é atualizada, você
