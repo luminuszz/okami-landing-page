@@ -17,15 +17,15 @@ export function Header() {
         </div>
 
         <div className=" flex flex-col items-center justify-start gap-2 md:flex-row">
-          <div className="invisible  flex items-center gap-2 md:visible ">
+          <div className="hidden  items-center gap-2 md:flex ">
             <ActionsButtons />
           </div>
 
-          <div className="invisible  flex items-center gap-2 md:visible ">
+          <div className="hidden  items-center gap-2 md:flex  ">
             <ModeToggle />
           </div>
 
-          <div className="md:invisible">
+          <div className="mt-20 md:invisible">
             <Drawer>
               <DrawerTrigger asChild>
                 <Flame className="animate-bounce " />
