@@ -15,8 +15,43 @@ export const metadata: Metadata = {
   title: 'Okami | Acompanhe e sincronize suas obras favoritas em um só lugar.',
   description: 'Acompanhe e sincronize suas obras favoritas em um só lugar',
   authors: [{ name: 'Okami', url: '@okami' }],
-  robots: 'follow, index',
-  icons: ['/favicon.ico', '/okami-logo.png'],
+  robots: {
+    follow: true,
+    index: true,
+  },
+  icons: {
+    icon: '/favicon.ico',
+  },
+  category: 'Entertainment',
+  creator: 'Davi Ribeiro',
+  keywords: [
+    'Okami',
+    'Manga',
+    'Anime',
+    'Mangá',
+    'Animação',
+    'Animes',
+    'Gerenciador',
+    'Obras',
+    'WEBTOON',
+    'Webcomic',
+    'Manhwa',
+    'Manhua',
+  ],
+
+  openGraph: {
+    description:
+      'Okami | Acompanhe e sincronize suas obras favoritas em um só lugar.',
+    images: ['https://me.okami.daviribeiro.com/okami-logo.png'],
+    authors: ['Davi Ribeiro'],
+    actors: ['Okami'],
+    creators: ['Davi Ribeiro'],
+  },
+  twitter: {
+    description:
+      'Okami | Acompanhe e sincronize suas obras favoritas em um só lugar.',
+    images: ['https://me.okami.daviribeiro.com/okami-logo.png'],
+  },
 }
 
 export default function RootLayout({
