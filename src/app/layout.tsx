@@ -1,6 +1,7 @@
 import './globals.css'
 
 import { GoogleTagManager } from '@next/third-parties/google'
+import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
 import { Inter as FontSans } from 'next/font/google'
 
@@ -78,6 +79,7 @@ export default function RootLayout({
           {children}
         </body>
       </ThemeProvider>
+      <Analytics />
       <GoogleTagManager gtmId="GT-T9WP9V4S" />
     </html>
   )
