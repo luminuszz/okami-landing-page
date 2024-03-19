@@ -78,7 +78,7 @@ export default function RootLayout({
           {children}
         </body>
       </ThemeProvider>
-      <GoogleTagManager gtmId="G-79XSVG5D9J" />
+      <GoogleTagManager gtmId="GT-T9WP9V4S" />
     </html>
   )
 }
