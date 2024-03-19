@@ -1,5 +1,6 @@
 import './globals.css'
 
+import { GoogleTagManager } from '@next/third-parties/google'
 import type { Metadata } from 'next'
 import { Inter as FontSans } from 'next/font/google'
 
@@ -77,6 +78,7 @@ export default function RootLayout({
           {children}
         </body>
       </ThemeProvider>
+      <GoogleTagManager gtmId="G-79XSVG5D9J" />
     </html>
   )
 }
