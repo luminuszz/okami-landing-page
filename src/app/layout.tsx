@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   openGraph: {
     description:
       'Okami | Acompanhe e sincronize suas obras favoritas em um só lugar.',
-    images: ['https://me.okami.daviribeiro.com/okami-logo.png'],
+    images: ['https://me.okami.daviribeiro.com/okami-logo-black.png'],
     authors: ['Davi Ribeiro'],
     actors: ['Okami'],
     creators: ['Davi Ribeiro'],
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
   twitter: {
     description:
       'Okami | Acompanhe e sincronize suas obras favoritas em um só lugar.',
-    images: ['https://me.okami.daviribeiro.com/okami-logo.png'],
+    images: ['https://me.okami.daviribeiro.com/okami-logo-black.png'],
   },
 }
 
