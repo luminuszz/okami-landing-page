@@ -4,9 +4,7 @@ import { Button } from './ui/button'
 
 export function ActionsButtons() {
   function handleToAppRedirect(path: string) {
-    const route = `https://okami.daviribeiro.com/auth/${path}`
-
-    window.location.href = route
+    window.location.href = `https://app.myokami.xyz/auth/${path}`
   }
 
   return (
