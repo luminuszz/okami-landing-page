@@ -20,7 +20,9 @@ export function Header() {
       },
     )
 
-    return response.status === 200
+    const data: { isLogged: boolean } = await response.json()
+
+    return response.status === 200 && data.isLogged
   }
 
   useEffect(() => {
