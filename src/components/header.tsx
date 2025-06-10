@@ -9,6 +9,7 @@ import { Drawer, DrawerTrigger } from './ui/drawer'
 
 export function Header() {
   const [isLoggedIn, setIsLogged] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   async function checksUserSession(): Promise<boolean> {
     const response = await fetch(
@@ -26,11 +27,13 @@ export function Header() {
   }
 
   useEffect(() => {
+    setIsLoading(true)
     checksUserSession()
       .then(setIsLogged)
       .catch(() => {
         setIsLogged(false)
       })
+      .finally(() => setIsLoading(false))
   }, [])
 
   return (
@@ -44,7 +47,7 @@ export function Header() {
 
         <div className=" flex flex-col items-center justify-start gap-2 md:flex-row">
           <div className="hidden  items-center gap-2 md:flex ">
-            <ActionsButtons isLoggedIn={isLoggedIn} />
+            {!isLoading && <ActionsButtons isLoggedIn={isLoggedIn} />}
           </div>
 
           <div className="hidden  items-center gap-2 md:flex  ">
