@@ -50,7 +50,7 @@ export function Header() {
               <DrawerTrigger asChild>
                 <Flame className="animate-bounce " />
               </DrawerTrigger>
-              <MobileMenu />
+              <MobileMenu isLoggedIn={isLoggedIn} />
             </Drawer>
           </div>
         </div>

@@ -9,7 +9,11 @@ import {
   DrawerTitle,
 } from './ui/drawer'
 
-export function MobileMenu() {
+export interface MobileMenuProps {
+  isLoggedIn: boolean
+}
+
+export function MobileMenu({ isLoggedIn }: MobileMenuProps) {
   return (
     <DrawerContent dir="right">
       <DrawerHeader>
@@ -20,7 +24,7 @@ export function MobileMenu() {
         <ModeToggle />
       </div>
       <DrawerFooter className="flex  gap-2">
-        <ActionsButtons />
+        <ActionsButtons isLoggedIn={isLoggedIn} />
         <DrawerClose>
           <Button variant="outline">Cancel</Button>
         </DrawerClose>
