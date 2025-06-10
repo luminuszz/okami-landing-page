@@ -1,5 +1,4 @@
 import { Flame } from 'lucide-react'
-import { useEffect, useState } from 'react'
 
 import { ActionsButtons } from './actions-buttons'
 import { Logo } from './logo'
@@ -8,34 +7,6 @@ import { ModeToggle } from './theme-toggle'
 import { Drawer, DrawerTrigger } from './ui/drawer'
 
 export function Header() {
-  const [isLoggedIn, setIsLogged] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-
-  async function checksUserSession(): Promise<boolean> {
-    const response = await fetch(
-      String(`${process.env.NEXT_PUBLIC_API_URL}/auth/v2/check-session`),
-      {
-        method: 'GET',
-        mode: 'cors',
-        credentials: 'include',
-      },
-    )
-
-    const data: { isLogged: boolean } = await response.json()
-
-    return response.status === 200 && data.isLogged
-  }
-
-  useEffect(() => {
-    setIsLoading(true)
-    checksUserSession()
-      .then(setIsLogged)
-      .catch(() => {
-        setIsLogged(false)
-      })
-      .finally(() => setIsLoading(false))
-  }, [])
-
   return (
     <header className="px-4">
       <div className="flex flex-col items-center justify-center  py-2 md:flex-row md:justify-between">
@@ -47,7 +18,7 @@ export function Header() {
 
         <div className=" flex flex-col items-center justify-start gap-2 md:flex-row">
           <div className="hidden  items-center gap-2 md:flex ">
-            {!isLoading && <ActionsButtons isLoggedIn={isLoggedIn} />}
+            <ActionsButtons />
           </div>
 
           <div className="hidden  items-center gap-2 md:flex  ">
@@ -59,7 +30,7 @@ export function Header() {
               <DrawerTrigger asChild>
                 <Flame className="animate-bounce " />
               </DrawerTrigger>
-              <MobileMenu isLoggedIn={isLoggedIn} />
+              <MobileMenu />
             </Drawer>
           </div>
         </div>
