@@ -14,6 +14,8 @@ export function Header() {
     const response = await fetch(
       String(`${process.env.NEXT_PUBLIC_API_URL}/auth/v2/check-session`),
       {
+        method: 'GET',
+        mode: 'cors',
         credentials: 'include',
       },
     )
@@ -24,7 +26,13 @@ export function Header() {
   }
 
   useEffect(() => {
-    checksUserSession().then(setIsLogged).catch(setIsLogged)
+    checksUserSession()
+      .then(() => {
+        setIsLogged(true)
+      })
+      .catch(() => {
+        setIsLogged(false)
+      })
   }, [])
 
   return (
