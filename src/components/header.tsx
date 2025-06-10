@@ -20,8 +20,6 @@ export function Header() {
       },
     )
 
-    await response.json()
-
     return response.status === 200
   }
 
