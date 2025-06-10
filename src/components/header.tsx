@@ -27,9 +27,7 @@ export function Header() {
 
   useEffect(() => {
     checksUserSession()
-      .then(() => {
-        setIsLogged(true)
-      })
+      .then(setIsLogged)
       .catch(() => {
         setIsLogged(false)
       })
