@@ -1,4 +1,5 @@
 import { Flame } from 'lucide-react'
+import { useEffect, useState } from 'react'
 
 import { ActionsButtons } from './actions-buttons'
 import { Logo } from './logo'
@@ -7,6 +8,25 @@ import { ModeToggle } from './theme-toggle'
 import { Drawer, DrawerTrigger } from './ui/drawer'
 
 export function Header() {
+  const [isLoggedIn, setIsLogged] = useState(false)
+
+  async function checksUserSession(): Promise<boolean> {
+    const response = await fetch(
+      String(`${process.env.NEXT_PUBLIC_API_URL}/auth/v2/check-session`),
+      {
+        credentials: 'include',
+      },
+    )
+
+    await response.json()
+
+    return response.status === 200
+  }
+
+  useEffect(() => {
+    checksUserSession().then(setIsLogged).catch(setIsLogged)
+  }, [])
+
   return (
     <header className="px-4">
       <div className="flex flex-col items-center justify-center  py-2 md:flex-row md:justify-between">
@@ -18,7 +38,7 @@ export function Header() {
 
         <div className=" flex flex-col items-center justify-start gap-2 md:flex-row">
           <div className="hidden  items-center gap-2 md:flex ">
-            <ActionsButtons />
+            <ActionsButtons isLoggedIn={isLoggedIn} />
           </div>
 
           <div className="hidden  items-center gap-2 md:flex  ">

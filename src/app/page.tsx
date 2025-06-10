@@ -1,3 +1,5 @@
+'use client'
+
 import { BarChart3, BookCopy, FolderSync } from 'lucide-react'
 
 import { Header } from '@/components/header'
