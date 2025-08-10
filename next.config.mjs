@@ -4,13 +4,12 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'okami-storage.s3.amazonaws.com',
+        hostname: 'okami-storage.daviribeiro.com',
         port: '',
         pathname: '/work-images/**',
       },
     ],
   },
-  output: 'export',
 }
 
 export default nextConfig

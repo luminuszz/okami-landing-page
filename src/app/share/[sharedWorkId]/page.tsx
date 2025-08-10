@@ -3,6 +3,7 @@ import { Metadata } from 'next'
 import Image from 'next/image'
 
 import { ActionButtons } from '@/components/action-buttons'
+import { TagList } from '@/components/tag-list'
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { Card } from '@/components/ui/card'
@@ -50,15 +51,33 @@ async function fetchWorksDetails(publicWorkId: string) {
 }
 
 export interface ShareWorkPageProps {
-  params: {
+  params: Promise<{
     sharedWorkId: string
+  }>
+}
+
+export async function generateStaticParams() {
+  const results = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/shared-work/share-all`,
+  )
+
+  if (!results.ok) {
+    throw new Error('Failed to fetch shared works')
   }
+
+  const sharedWorks = (await results.json()) as string[]
+
+  return sharedWorks.map((sharedWorkId) => ({
+    sharedWorkId,
+  }))
 }
 
 export async function generateMetadata({
   params,
 }: ShareWorkPageProps): Promise<Metadata> {
-  const results = await fetchWorksDetails(params.sharedWorkId)
+  const { sharedWorkId } = await params
+
+  const results = await fetchWorksDetails(sharedWorkId)
 
   const { work, owner } = results
 
@@ -85,7 +104,8 @@ export async function generateMetadata({
 }
 
 export default async function ShareWorkPage({ params }: ShareWorkPageProps) {
-  const { work, owner } = await fetchWorksDetails(params.sharedWorkId)
+  const { sharedWorkId } = await params
+  const { work, owner } = await fetchWorksDetails(sharedWorkId)
 
   return (
     <div className="container max-w-[1200px] mx-auto px-4 py-8 h-screen items-center justify-center">
@@ -112,9 +132,11 @@ export default async function ShareWorkPage({ params }: ShareWorkPageProps) {
         <div className="flex-shrink-0">
           <Card className="w-full md:w-64 overflow-hidden border-none bg-transparent">
             <Image
+              width={256}
+              height={420}
               src={work.imageUrl}
               alt={`Capa de ${work.name} [${work.alternativeName}]`}
-              className="rounded-lg object-cover size-full h-[420px]"
+              className="rounded-lg object-cover size-full"
               loading="eager"
             />
           </Card>
@@ -127,29 +149,7 @@ export default async function ShareWorkPage({ params }: ShareWorkPageProps) {
               <p className="text-gray-400 mt-1">{work.alternativeName}</p>
             </div>
 
-            <div className="flex flex-wrap gap-2">
-              {work.tags.map((tag) => {
-                const color = getTagColor(tag.color)
-                const bgColor = getTagColor(tag.color, 800)
-
-                return (
-                  <Badge
-                    key={tag.id}
-                    onMouseEnter={(e) =>
-                      (e.currentTarget.style.backgroundColor = bgColor)
-                    }
-                    onMouseLeave={(e) =>
-                      (e.currentTarget.style.backgroundColor = color)
-                    }
-                    style={{ background: color }}
-                    variant="secondary"
-                    className={"text-gray-100 hover:bg-['red']"}
-                  >
-                    {tag.name}
-                  </Badge>
-                )
-              })}
-            </div>
+            <TagList tags={work.tags ?? []} />
 
             <div className="mt-2">
               <h2 className="text-md mb-2 text-muted-foreground">Sinopse</h2>
@@ -160,7 +160,7 @@ export default async function ShareWorkPage({ params }: ShareWorkPageProps) {
             <ActionButtons
               work={{
                 url: work.url,
-                publicId: params.sharedWorkId,
+                publicId: sharedWorkId,
                 category: work.category,
               }}
             />
