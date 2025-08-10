@@ -1,13 +1,11 @@
-import { getYear } from 'date-fns/fp/getYear'
+import { getYear } from 'date-fns'
 import { Metadata } from 'next'
 import Image from 'next/image'
 
 import { ActionButtons } from '@/components/action-buttons'
 import { TagList } from '@/components/tag-list'
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
-import { Badge } from '@/components/ui/badge'
 import { Card } from '@/components/ui/card'
-import { getTagColor } from '@/lib/utils'
 
 export interface Owner {
   name: string
