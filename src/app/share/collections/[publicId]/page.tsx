@@ -17,8 +17,6 @@ async function fetchCollectionDetails(publicId: string) {
 
   const data = (await results.json()) as CollectionResponse
 
-  console.log({ data })
-
   return data
 }
 
@@ -89,7 +87,9 @@ export default async function ShareCollectionPage({
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold text-foreground mb-2">{title}</h1>
-            <p className="text-md text-muted-foreground">{description}</p>
+            <p className="text-md text-muted-foreground max-w-[60%]">
+              {description}
+            </p>
           </div>
 
           <div className="flex flex-col gap-3 justify-center items-center">
