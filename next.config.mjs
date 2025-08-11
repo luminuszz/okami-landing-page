@@ -8,6 +8,12 @@ const nextConfig = {
         port: '',
         pathname: '/work-images/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'okami-storage.daviribeiro.com',
+        port: '',
+        pathname: '/user-avatars-images/**',
+      },
     ],
   },
 }

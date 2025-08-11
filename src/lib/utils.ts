@@ -1,4 +1,6 @@
 import { type ClassValue, clsx } from 'clsx'
+import { formatDistance, FormatDistanceOptions, parseISO } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 import { twMerge } from 'tailwind-merge'
 import colors from 'tailwindcss/colors'
 
@@ -43,4 +45,20 @@ export const getTagColor = (
 
 export const createDomainUrlWithPath = (path: string) => {
   return `${window.location.protocol}//${window.location.hostname}${window.location.port ? `:${window.location.port}` : ''}${path}`
+}
+
+export const parseDistanceByDate = (
+  date: Date | string,
+  options: FormatDistanceOptions = {},
+) => {
+  const dateToParse = typeof date === 'string' ? parseISO(date) : date
+
+  const now = new Date()
+
+  return formatDistance(dateToParse, now, {
+    addSuffix: true,
+    includeSeconds: true,
+    locale: ptBR,
+    ...options,
+  })
 }
