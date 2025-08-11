@@ -21,10 +21,7 @@ export function WorkButtonLink({ work }: WorkButtonLinkProps) {
       className="mt-2"
       onClick={() => handleOpenUrl(work.url)}
     >
-      <a
-        href={`/public/share/${work.id}`}
-        className="text-blue-500 hover:underline"
-      >
+      <a className="text-blue-500 hover:underline">
         {work.category === 'ANIME' ? 'Ver Anime' : 'Ver Manga'}
       </a>
     </Button>
