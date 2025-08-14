@@ -15,9 +15,7 @@ async function fetchCollectionDetails(publicId: string) {
     `${process.env.NEXT_PUBLIC_API_URL}/custom-list/share/${publicId}`,
   )
 
-  const data = (await results.json()) as CollectionResponse
-
-  return data
+  return (await results.json()) as CollectionResponse
 }
 
 export interface ShareCollectionPageProps {

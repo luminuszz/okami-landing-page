@@ -59,10 +59,6 @@ export async function generateStaticParams() {
     `${process.env.NEXT_PUBLIC_API_URL}/shared-work/share-all`,
   )
 
-  if (!results.ok) {
-    throw new Error('Failed to fetch shared works')
-  }
-
   const sharedWorks = (await results.json()) as string[]
 
   return sharedWorks.map((sharedWorkId) => ({
