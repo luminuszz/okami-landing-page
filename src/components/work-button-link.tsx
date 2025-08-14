@@ -21,9 +21,7 @@ export function WorkButtonLink({ work }: WorkButtonLinkProps) {
       className="mt-2"
       onClick={() => handleOpenUrl(work.url)}
     >
-      <a className="text-blue-500 hover:underline">
-        {work.category === 'ANIME' ? 'Ver Anime' : 'Ver Manga'}
-      </a>
+      <a className="text-blue-500 hover:underline">Ver Obra</a>
     </Button>
   )
 }
