@@ -2,51 +2,11 @@ import { getYear } from 'date-fns'
 import { Metadata } from 'next'
 import Image from 'next/image'
 
+import { fetchSharedWorkById, fetchSharedWorksIds } from '@/api'
 import { ActionButtons } from '@/components/action-buttons'
 import { TagList } from '@/components/tag-list'
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
 import { Card } from '@/components/ui/card'
-
-export interface Owner {
-  name: string
-  imageUrl: string
-  createdAt: string
-  id: string
-}
-
-export interface Tag {
-  id: string
-  name: string
-  color: string
-}
-
-export interface Work {
-  url: string
-  alternativeName: string
-  description: string
-  imageUrl: string
-  name: string
-  tags: Tag[]
-  category: string
-}
-
-export interface Results {
-  publicId: string
-  owner: Owner
-  work: Work
-}
-
-async function fetchWorksDetails(publicWorkId: string) {
-  const results = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/shared-work/share/${publicWorkId}`,
-  )
-
-  if (!results.ok) {
-    throw new Error('Failed to fetch work details')
-  }
-
-  return (await results.json()) as Results
-}
 
 export interface ShareWorkPageProps {
   params: Promise<{
@@ -55,15 +15,9 @@ export interface ShareWorkPageProps {
 }
 
 export async function generateStaticParams() {
-  const results = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/shared-work/share-all`,
-  )
+  const results = await fetchSharedWorksIds()
 
-  const sharedWorks = (await results.json()) as string[]
-
-  return sharedWorks.map((sharedWorkId) => ({
-    sharedWorkId,
-  }))
+  return results.map((item) => ({ sharedWorkId: item }))
 }
 
 export async function generateMetadata({
@@ -71,7 +25,7 @@ export async function generateMetadata({
 }: ShareWorkPageProps): Promise<Metadata> {
   const { sharedWorkId } = await params
 
-  const results = await fetchWorksDetails(sharedWorkId)
+  const results = await fetchSharedWorkById(sharedWorkId)
 
   const { work, owner } = results
 
@@ -99,7 +53,7 @@ export async function generateMetadata({
 
 export default async function ShareWorkPage({ params }: ShareWorkPageProps) {
   const { sharedWorkId } = await params
-  const { work, owner } = await fetchWorksDetails(sharedWorkId)
+  const { work, owner } = await fetchSharedWorkById(sharedWorkId)
 
   return (
     <div className="container max-w-[1200px] mx-auto px-4 py-8 h-screen items-center justify-center">

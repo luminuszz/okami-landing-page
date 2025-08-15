@@ -3,20 +3,15 @@ import { Clock } from 'lucide-react'
 import { Metadata } from 'next'
 import Image from 'next/image'
 
+import {
+  fetchCollectionDetailsByPublicId,
+  fetchCollectionsIdsServerSide,
+} from '@/api'
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
 import { WorkButtonLink } from '@/components/work-button-link'
 import { parseDistanceByDate, parseTagColor } from '@/lib/utils'
-import { CollectionResponse } from '@/types/collection-response'
-
-async function fetchCollectionDetails(publicId: string) {
-  const results = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/custom-list/share/${publicId}`,
-  )
-
-  return (await results.json()) as CollectionResponse
-}
 
 export interface ShareCollectionPageProps {
   params: Promise<{
@@ -25,15 +20,7 @@ export interface ShareCollectionPageProps {
 }
 
 export async function generateStaticParams() {
-  const results = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/custom-list/share-all`,
-  )
-
-  if (!results.ok) {
-    throw new Error('Failed to fetch shared collections')
-  }
-
-  const shareCollectionsIds = (await results.json()) as string[]
+  const shareCollectionsIds = await fetchCollectionsIdsServerSide()
 
   return shareCollectionsIds.map((publicId) => ({
     publicId,
@@ -45,7 +32,7 @@ export async function generateMetadata({
 }: ShareCollectionPageProps): Promise<Metadata> {
   const { publicId } = await params
 
-  const results = await fetchCollectionDetails(publicId)
+  const results = await fetchCollectionDetailsByPublicId(publicId)
 
   const { owner, title, description, thumbnailUrl } = results
 
@@ -77,7 +64,7 @@ export default async function ShareCollectionPage({
   const { publicId } = await params
 
   const { title, description, owner, works } =
-    await fetchCollectionDetails(publicId)
+    await fetchCollectionDetailsByPublicId(publicId)
 
   return (
     <div className="min-h-screen">
